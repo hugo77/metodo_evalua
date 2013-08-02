@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -8,13 +8,37 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <script type="text/javascript">
+        //<![CDATA[
+        function handleMessage(data) {
+            var currentText = $('#chat\\:messages').val();
+            var message = data + "\n";
+            var newContent = currentText + message;
+            $('#chat\\:messages').val(newContent);
+            $('#user_form\\:message').focus();
+        }
+        //]]>
+        </script>
     </h:head>
     <h:body>
-        <h1>Hello World PrimeFaces</h1>
-
-        <h:form>
-            <p:panel header="Prueba"/>
+        <h:form name="chat" id="chat">
+            <p:panel header="Conversaci&oacute;n">
+                <p:inputTextarea rows="10" cols="100" readonly="true" id="messages" autoResize="false"/>
+            </p:panel>
         </h:form>
-
+        <h:form id="user_form">
+            <p:panel header="Usuario" id="panel">
+                <h:panelGrid columns="7">
+                    <h:outputText value="Apodo: " />
+                    <p:inputText value="#{chatBean.nick}" required="true" id="nick" label="Nick"/>
+                    <p:message for="nick" display="icon"/>
+                    <h:outputText value="Mensaje: " />
+                    <p:inputText value="#{chatBean.message}" required="true" id="message" label="Message"/>
+                    <p:message for="message" display="icon"/>  
+                    <p:commandButton update="panel" value="Send" actionListener="#{chatBean.send}"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <p:socket onMessage="handleMessage" channel="/chat" />
     </h:body>
 </html>
