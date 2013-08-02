@@ -2,3 +2,4 @@ target/classes
 target/maven-archiver
 target/repo
 target/surefire
+target/embeddedTomcatSample.jar
