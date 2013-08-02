@@ -11,15 +11,25 @@
     </properties>
     <dependencies>
         <dependency>
-          <groupId>com.pusher</groupId>
-          <artifactId>pusher-java-client</artifactId>
-          <version>0.1.0-beta.1-SNAPSHOT</version>
-          <scope>provided</scope>
+            <groupId>com.pusher</groupId>
+            <artifactId>pusher-java-client</artifactId>
+            <version>0.1.0-beta.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.atmosphere</groupId>
+            <artifactId>atmosphere-runtime</artifactId>
+            <version>1.0.15</version>
         </dependency>
         <!-- JSF 2 -->
         <dependency>
@@ -34,11 +44,18 @@
         </dependency>
 
         <!-- EL -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>el-impl</artifactId>
             <version>2.2</version>
-        </dependency>
+        </dependency> -->
+        <!-- <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency> -->
+
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -105,15 +122,15 @@
             <layout>default</layout>
         </repository>
         <repository>
-          <id>pusher-java-client-mvn-repo</id>
-          <name>Pusher Java Client Library</name>
-          <url>https://raw.github.com/pusher/pusher-java-client/mvn-repo/</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
+            <id>pusher-java-client-mvn-repo</id>
+            <name>Pusher Java Client Library</name>
+            <url>https://raw.github.com/pusher/pusher-java-client/mvn-repo/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
 </project>

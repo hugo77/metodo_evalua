@@ -8,31 +8,37 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
         <script type="text/javascript">
         //<![CDATA[
-
-        Pusher.log = function(message) {
-            if (window.console && window.console.log) {
-                window.console.log(message);
-            }
-        };
-
-        var pusher = new Pusher('59cb3ed47c36fd6c1558');
-        var channel = pusher.subscribe('test_channel');
-        channel.bind('my_event', function(data) {
-            var from = data.from;
-            var txt  = new Date() + " " + from + ":\n" + $.trim(data.message) + "\n";
-            var box  = $("#chat\\:messages");
-            box.val(box.val() + txt);
-        });
+        function handleMessage(data) {
+            var currentText = $('#chat\\:messages').val();
+            var message = data + "\n";
+            var newContent = currentText + message;
+            $('#chat\\:messages').val(newContent);
+            $('#user_form\\:message').focus();
+        }
         //]]>
         </script>
     </h:head>
     <h:body>
-        <h1>Simple chat with pusher</h1>
-        <h:form id="chat" name="chat">
-            <p:inputTextarea rows="10" cols="100" readonly="true" id="messages"/>
+        <h:form name="chat" id="chat">
+            <p:panel header="Conversaci&oacute;n">
+                <p:inputTextarea rows="10" cols="100" readonly="true" id="messages" autoResize="false"/>
+            </p:panel>
         </h:form>
+        <h:form id="user_form">
+            <p:panel header="Usuario" id="panel">
+                <h:panelGrid columns="7">
+                    <h:outputText value="Apodo: " />
+                    <p:inputText value="#{chatBean.nick}" required="true" id="nick" label="Nick"/>
+                    <p:message for="nick" display="icon"/>
+                    <h:outputText value="Mensaje: " />
+                    <p:inputText value="#{chatBean.message}" required="true" id="message" label="Message"/>
+                    <p:message for="message" display="icon"/>  
+                    <p:commandButton update="panel" value="Send" actionListener="#{chatBean.send}"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <p:socket onMessage="handleMessage" channel="/chat" />
     </h:body>
 </html>
