@@ -3,3 +3,6 @@ target/maven-archiver
 target/repo
 target/surefire
 target/embeddedTomcatSample.jar
+nbactions.xml
+nb-configuration.xml
+tomcat.8080/
